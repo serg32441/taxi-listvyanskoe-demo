@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Такси Листвянское</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./demo.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body><div style="background:#20372f;color:#dfff66;padding:10px;text-align:center;font:14px system-ui">ДЕМО · заявки не отправляются · вводите только вымышленные данные</div>
+<header><div class="brand">Л<span>↗</span></div><div><strong>Листвянское</strong><small>Такси и доставка рядом</small></div></header>
+<main>
+  <p id="notice" role="status" aria-live="polite">Подключаемся к MAX…</p>
+  <nav id="navigation" hidden><button data-view="home">Главная</button><button data-view="my">Мои заявки</button><button id="admin-link" data-view="admin" hidden>Диспетчер</button></nav>
+  <section id="home" hidden>
+    <p class="eyebrow">ВАШ ПОСЁЛОК. ВАШ СЕРВИС.</p><h1>Куда едем<br>сегодня?</h1><p class="muted">Поездки и покупки — оставьте заявку,<br>и мы с вами свяжемся.</p>
+    <button class="service taxi" data-view="taxi"><span class="service-icon">🚕</span><span><strong>Вызвать такси</strong><small>По посёлку и за его пределы</small></span><b>↗</b></button>
+    <button class="service delivery" data-view="delivery"><span class="service-icon">🛒</span><span><strong>Заказать продукты</strong><small>Купим и привезём к вашей двери</small></span><b>↗</b></button>
+    <div class="note">Как это работает<p>Оставьте заявку → дождитесь звонка → встречайте водителя.</p></div>
+  </section>
+  <section id="form-view" hidden><button class="back" data-view="home">← На главную</button><h1 id="form-title"></h1>
+    <form id="order-form">
+      <div id="taxi-fields">
+        <label>Откуда<input name="from_address" maxlength="300" placeholder="Улица, дом, ориентир" autocomplete="street-address"></label>
+        <label>Куда<input name="to_address" maxlength="300" placeholder="Адрес или название места"></label>
+        <label>Когда<select id="when-mode"><option value="now">Сейчас</option><option value="later">Выбрать время</option></select></label>
+        <label id="time-label" hidden>Дата и время<input id="when-time" type="datetime-local"></label>
+        <label>Количество пассажиров<select name="passengers"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+      </div>
+      <div id="delivery-fields" hidden>
+        <label>Что купить<textarea name="items_text" maxlength="2000" rows="5" placeholder="Например: молоко 1 л, хлеб, яйца 10 шт."></textarea></label>
+        <label>Адрес доставки<input name="delivery_address" maxlength="300" placeholder="Улица, дом, квартира"></label>
+        <p class="note">Оплата наличными при получении</p>
+      </div>
+      <label>Телефон<input name="phone" type="tel" required minlength="7" maxlength="24" autocomplete="tel" placeholder="+7 900 000-00-00"></label>
+      <button type="button" id="phone-from-max" class="secondary">Подставить телефон из MAX</button>
+      <label>Комментарий <small>необязательно</small><textarea name="comment" maxlength="500" rows="3" placeholder="Что ещё нужно знать водителю?"></textarea></label>
+      <button id="submit-order" class="primary" type="submit">Отправить заявку</button>
+    </form>
+  </section>
+  <section id="success" hidden><div class="success-icon">✓</div><h1>Заявка принята</h1><p>Мы скоро с вами свяжемся.<br>Статус можно посмотреть в «Моих заявках».</p><button class="primary" data-view="home">На главную</button><button data-view="my" class="secondary">Мои заявки</button></section>
+  <section id="list-view" hidden><h1 id="list-title">Мои заявки</h1><label id="filter-label" hidden>Показать<select id="filter"><option value="">Все</option><option value="new">Новые</option><option value="accepted">Принятые</option><option value="in_progress">В работе</option><option value="done">Завершённые</option><option value="canceled">Отменённые</option></select></label><p id="refresh-info" class="muted"></p><div id="orders"></div><button id="refresh" class="secondary">Обновить список</button></section>
+</main>
+<footer>Листвянское · Помогаем быть ближе</footer>
+</body></html>
